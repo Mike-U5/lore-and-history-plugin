@@ -43,6 +43,7 @@ final public class StoryButton {
 
 	public void setStory(final Story story) {
 		this.activeStory = story;
+		this.widget.setOpacity(this.hasStory() ? 51 : 255);
 	}
 
 	public boolean hasStory()
