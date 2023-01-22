@@ -2,12 +2,16 @@ package com.loreandhistory;
 
 import com.google.inject.Provides;
 import com.loreandhistory.classes.Story;
+import com.loreandhistory.components.LoreButton;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.Player;
 import net.runelite.api.events.ClientTick;
+import net.runelite.api.events.WidgetLoaded;
+import net.runelite.api.widgets.Widget;
+import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
@@ -17,13 +21,11 @@ import net.runelite.client.plugins.PluginDescriptor;
 @PluginDescriptor(
 	name = "LoreAndHistory"
 )
-public class LoreAndHistoryPlugin extends Plugin
+final public class LoreAndHistoryPlugin extends Plugin
 {
 	private int tickCounter = 0;
-
 	@Inject
 	private Client client;
-
 	@Inject
 	private LoreAndHistoryConfig config;
 
@@ -59,20 +61,17 @@ public class LoreAndHistoryPlugin extends Plugin
 		}
 	}
 
-//	@Subscribe
-//	public void onWidgetLoaded(final WidgetLoaded e)
-//	{
-//		if (e.getGroupId() == WidgetInfo.FIXED_VIEWPORT_MINIMAP.getGroupId()) {
-//			final Widget window = this.client.getWidget(WidgetInfo.FIXED_VIEWPORT_MINIMAP);
-//
-//			if (window != null) {
-//				this.createLoreButton(window);
-//				this.updateLoreButton();
-//			}
-//		} else if (e.getGroupId() == WidgetInfo.QUEST_COMPLETED.getGroupId()) {
-//			this.updateLoreButton();
-//		}
-//	}
+	@Subscribe
+	public void onWidgetLoaded(final WidgetLoaded e)
+	{
+		if (e.getGroupId() == WidgetInfo.FIXED_VIEWPORT_MINIMAP.getGroupId()) {
+			final Widget parent = this.client.getWidget(WidgetInfo.FIXED_VIEWPORT_MINIMAP);
+
+			if (parent != null) {
+				final LoreButton button = new LoreButton(this.client, parent);
+			}
+		}
+	}
 
 //	private void createLoreButton(final Widget window)
 //	{
