@@ -29,4 +29,9 @@ final public class DialogueLine {
 	{
 
 	}
+
+	public int getDuration()
+	{
+		return this.durationInMs;
+	}
 }

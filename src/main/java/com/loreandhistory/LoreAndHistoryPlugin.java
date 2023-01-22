@@ -23,7 +23,6 @@ import net.runelite.client.plugins.PluginDescriptor;
 )
 final public class LoreAndHistoryPlugin extends Plugin
 {
-	private int tickCounter = 0;
 	@Inject
 	private Client client;
 	@Inject
@@ -44,21 +43,14 @@ final public class LoreAndHistoryPlugin extends Plugin
 	@Subscribe
 	public void onClientTick(final ClientTick e)
 	{
-		this.tickCounter++;
+		final Player player = this.client.getLocalPlayer();
 
-		if (this.tickCounter % 5 == 0) {
-			// Runs every 0.1 seconds
-			final Player player = this.client.getLocalPlayer();
+		if (player != null) {
+			final Story story = StoryRegistry.getStoryForZone(player.getWorldLocation());
 
-			if (player != null) {
-				final Story story = StoryRegistry.getStoryForZone(player.getWorldLocation());
-
-				if (story != null) {
-					client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Example says " + story.getName(), null);
-				}
+			if (story != null) {
+				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Example says " + story.getName(), null);
 			}
-
-			this.tickCounter = 0;
 		}
 	}
 
