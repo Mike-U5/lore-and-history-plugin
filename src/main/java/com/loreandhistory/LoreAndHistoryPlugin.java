@@ -63,7 +63,7 @@ final public class LoreAndHistoryPlugin extends Plugin
 			final Widget parent = this.client.getWidget(WidgetInfo.FIXED_VIEWPORT_MINIMAP);
 
 			if (parent != null) {
-				this.storyButton = new StoryButton(parent);
+				this.storyButton = new StoryButton(parent, this.client);
 			}
 		}
 	}

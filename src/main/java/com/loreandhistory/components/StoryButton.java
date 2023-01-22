@@ -1,8 +1,6 @@
 package com.loreandhistory.components;
 
 import com.loreandhistory.classes.Story;
-import javax.inject.Inject;
-import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.ScriptEvent;
 import net.runelite.api.widgets.JavaScriptCallback;
@@ -21,15 +19,13 @@ import net.runelite.api.widgets.WidgetType;
 //4175: Book relic (4177)
 //4753: Play(ish) button
 final public class StoryButton {
-	@Inject
-	private Client client;
-
 	private final Widget widget;
-
-	private int spriteId = 1706;
+	private Client client;
 	private Story activeStory = null;
 
-	public StoryButton(final Widget parent) {
+	public StoryButton(final Widget parent, final Client client) {
+		this.client = client;
+
 		this.widget = parent.createChild(-1, WidgetType.GRAPHIC);
 		this.widget.setPos(205, 0);
 		this.widget.setSize(40, 40);
@@ -58,17 +54,15 @@ final public class StoryButton {
 		} else if (e.getOp() == 3) {
 			this.activeStory.stop();
 		}
-
-		this.client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "CHOSE " + e.getOp(), null);
 	}
 
 	private void onMouseHover(final ScriptEvent e)
 	{
-		this.client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "HOVER", null);
+		//LoreAndHistoryPlugin.clientSingleton.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "HOVER", null);
 	}
 
 	private void onMouseLeave(final ScriptEvent e)
 	{
-		this.client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "LEAVE", null);
+		//LoreAndHistoryPlugin.clientSingleton.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "LEAVE", null);
 	}
 }
