@@ -1,12 +1,9 @@
 package com.loreandhistory.classes;
 
-import javax.inject.Inject;
+import com.loreandhistory.LoreAndHistoryPlugin;
 import net.runelite.api.ChatMessageType;
-import net.runelite.api.Client;
 
 final public class DialogueLine {
-	@Inject
-	private Client client;
 	private final String text;
 	private final int durationInMs;
 
@@ -15,15 +12,15 @@ final public class DialogueLine {
 		this.durationInMs = 1000 + (text.length() * 40);
 	}
 
-	public void playDialogue(final Client client) {
-		this.client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", this.text, null);
+	public void playDialogue() {
+		LoreAndHistoryPlugin.CLIENT.addChatMessage(ChatMessageType.GAMEMESSAGE, "", this.text, null);
 	}
 
-	public void pauseDialogue(final Client client) {
+	public void pauseDialogue() {
 
 	}
 
-	public void stopDialogue(final Client client) {
+	public void stopDialogue() {
 
 	}
 

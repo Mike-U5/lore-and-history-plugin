@@ -23,6 +23,8 @@ import net.runelite.client.plugins.PluginDescriptor;
 )
 final public class LoreAndHistoryPlugin extends Plugin
 {
+	public static Client CLIENT;
+
 	@Inject
 	private Client client;
 	@Inject
@@ -32,6 +34,7 @@ final public class LoreAndHistoryPlugin extends Plugin
 
 	@Override
 	protected void startUp() throws Exception {
+		LoreAndHistoryPlugin.CLIENT = this.client;
 		log.info("Example started!");
 	}
 
@@ -60,7 +63,7 @@ final public class LoreAndHistoryPlugin extends Plugin
 			final Widget parent = this.client.getWidget(WidgetInfo.FIXED_VIEWPORT_MINIMAP);
 
 			if (parent != null) {
-				this.storyButton = new StoryButton(parent, this.client);
+				this.storyButton = new StoryButton(parent);
 			}
 		}
 	}

@@ -1,7 +1,6 @@
 package com.loreandhistory.classes;
 
 import com.loreandhistory.enums.DialogueStatus;
-import net.runelite.api.Client;
 
 final public class Story {
 	final private String name;
@@ -18,47 +17,47 @@ final public class Story {
 		this.dialogueLines = dialogueLines;
 	}
 
-	public void tick(final Client client) {
+	public void tick() {
 		if (this.dialogueStatus == DialogueStatus.PLAYING) {
 			final DialogueLine dialogue = this.dialogueLines[this.index];
 
 			if (dialogue != null && this.tickCounter > dialogue.getDuration()) {
-				this.sayNextLine(client);
+				this.sayNextLine();
 			} else {
 				this.tickCounter += 20; // Client ticks every 20 ms
 			}
 		}
 	}
 
-	private void sayNextLine(final Client client) {
+	private void sayNextLine() {
 		this.index += 1;
 		this.tickCounter = 0;
 
 		if (this.index < this.dialogueLines.length) {
-			this.dialogueLines[this.index].playDialogue(client);
+			this.dialogueLines[this.index].playDialogue();
 		} else {
 			this.dialogueStatus = DialogueStatus.COMPLETED;
 		}
 	}
 
-	public void startStory(final Client client) {
+	public void startStory() {
 		if (this.dialogueStatus == DialogueStatus.STOPPED || this.dialogueStatus == DialogueStatus.COMPLETED) {
 			this.dialogueStatus = DialogueStatus.PLAYING;
 			this.index = -1;
-			this.sayNextLine(client);
+			this.sayNextLine();
 		}
 	}
 
-	public void pauseStory(final Client client) {
+	public void pauseStory() {
 		if (this.dialogueStatus != DialogueStatus.PAUSED && this.index >= 0 && this.index <= this.dialogueLines.length) {
-			this.dialogueLines[this.index].pauseDialogue(client);
+			this.dialogueLines[this.index].pauseDialogue();
 			this.dialogueStatus = DialogueStatus.PAUSED;
 		}
 	}
 
-	public void stopStory(final Client client) {
+	public void stopStory() {
 		if (this.dialogueStatus != DialogueStatus.STOPPED && this.index >= 0 && this.index <= this.dialogueLines.length) {
-			this.dialogueLines[this.index].stopDialogue(client);
+			this.dialogueLines[this.index].stopDialogue();
 			this.dialogueStatus = DialogueStatus.STOPPED;
 		}
 	}

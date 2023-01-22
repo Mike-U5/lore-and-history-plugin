@@ -1,7 +1,6 @@
 package com.loreandhistory.components;
 
 import com.loreandhistory.classes.Story;
-import net.runelite.api.Client;
 import net.runelite.api.ScriptEvent;
 import net.runelite.api.widgets.JavaScriptCallback;
 import net.runelite.api.widgets.Widget;
@@ -20,12 +19,9 @@ import net.runelite.api.widgets.WidgetType;
 //4753: Play(ish) button
 final public class StoryButton {
 	private final Widget widget;
-	private final Client client;
 	private Story activeStory = null;
 
-	public StoryButton(final Widget parent, final Client client) {
-		this.client = client;
-
+	public StoryButton(final Widget parent) {
 		this.widget = parent.createChild(-1, WidgetType.GRAPHIC);
 		this.widget.setPos(205, 0);
 		this.widget.setSize(40, 40);
@@ -52,13 +48,13 @@ final public class StoryButton {
 	}
 
 	private void onOptionSelected(final ScriptEvent e) {
-		if (this.activeStory != null && this.client != null) {
+		if (this.activeStory != null) {
 			if (e.getOp() == 1) {
-				this.activeStory.startStory(this.client);
+				this.activeStory.startStory();
 			} else if (e.getOp() == 2) {
-				this.activeStory.pauseStory(this.client);
+				this.activeStory.pauseStory();
 			} else if (e.getOp() == 3) {
-				this.activeStory.stopStory(this.client);
+				this.activeStory.stopStory();
 			}
 		}
 	}
