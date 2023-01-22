@@ -73,23 +73,6 @@ final public class LoreAndHistoryPlugin extends Plugin
 		}
 	}
 
-//	private void createLoreButton(final Widget window)
-//	{
-//		// Create the widget for the button
-//		final Widget buttonWidget = window.createChild(-1, WidgetType.GRAPHIC);
-//
-//		// Wrap as a button, set the position, sprite, etc.
-//		this.button = new LoreButton(buttonWidget, this.client);
-//		this.button.setSprite(this.getButtonSprite());
-//		this.button.addAction("", this::onLoreButtonPressed);
-//	}
-//
-//	private void updateLoreButton()
-//	{
-//		this.loreLetter = LoreTome.findAreaLore(this.activeRegionId);
-//		this.button.setLore(this.loreLetter);
-//	}
-
 	@Provides
 	LoreAndHistoryConfig provideConfig(ConfigManager configManager)
 	{
