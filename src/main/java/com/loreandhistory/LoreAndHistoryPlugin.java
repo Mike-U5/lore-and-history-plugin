@@ -59,6 +59,38 @@ public class LoreAndHistoryPlugin extends Plugin
 		}
 	}
 
+//	@Subscribe
+//	public void onWidgetLoaded(final WidgetLoaded e)
+//	{
+//		if (e.getGroupId() == WidgetInfo.FIXED_VIEWPORT_MINIMAP.getGroupId()) {
+//			final Widget window = this.client.getWidget(WidgetInfo.FIXED_VIEWPORT_MINIMAP);
+//
+//			if (window != null) {
+//				this.createLoreButton(window);
+//				this.updateLoreButton();
+//			}
+//		} else if (e.getGroupId() == WidgetInfo.QUEST_COMPLETED.getGroupId()) {
+//			this.updateLoreButton();
+//		}
+//	}
+
+//	private void createLoreButton(final Widget window)
+//	{
+//		// Create the widget for the button
+//		final Widget buttonWidget = window.createChild(-1, WidgetType.GRAPHIC);
+//
+//		// Wrap as a button, set the position, sprite, etc.
+//		this.button = new LoreButton(buttonWidget, this.client);
+//		this.button.setSprite(this.getButtonSprite());
+//		this.button.addAction("", this::onLoreButtonPressed);
+//	}
+//
+//	private void updateLoreButton()
+//	{
+//		this.loreLetter = LoreTome.findAreaLore(this.activeRegionId);
+//		this.button.setLore(this.loreLetter);
+//	}
+
 	@Provides
 	LoreAndHistoryConfig provideConfig(ConfigManager configManager)
 	{
