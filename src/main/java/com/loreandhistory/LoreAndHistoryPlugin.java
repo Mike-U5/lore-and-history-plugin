@@ -46,7 +46,8 @@ final public class LoreAndHistoryPlugin extends Plugin
 	{
 		this.tickCounter++;
 
-		if (this.tickCounter % 10 == 0) {
+		if (this.tickCounter % 5 == 0) {
+			// Runs every 0.1 seconds
 			final Player player = this.client.getLocalPlayer();
 
 			if (player != null) {

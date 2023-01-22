@@ -1,6 +1,7 @@
 package com.loreandhistory.classes;
 
 import javax.inject.Inject;
+import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 
 final public class DialogueLine {
@@ -16,7 +17,7 @@ final public class DialogueLine {
 
 	public void play()
 	{
-
+		this.client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", this.text, null);
 	}
 
 	public void pause()
