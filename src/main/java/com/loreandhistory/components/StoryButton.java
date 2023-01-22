@@ -20,7 +20,7 @@ import net.runelite.api.widgets.WidgetType;
 //3566: Scroll with question mark orange outline
 //4175: Book relic (4177)
 //4753: Play(ish) button
-final public class LoreButton {
+final public class StoryButton {
 	@Inject
 	private Client client;
 
@@ -29,7 +29,7 @@ final public class LoreButton {
 	private int spriteId = 1706;
 	private Story activeStory = null;
 
-	public LoreButton(final Widget parent) {
+	public StoryButton(final Widget parent) {
 		this.widget = parent.createChild(-1, WidgetType.GRAPHIC);
 		this.widget.setPos(205, 0);
 		this.widget.setSize(40, 40);
@@ -45,7 +45,7 @@ final public class LoreButton {
 		this.widget.setHasListener(true);
 	}
 
-	public void setActiveDialogue(final Story story) {
+	public void setStory(final Story story) {
 		this.activeStory = story;
 	}
 

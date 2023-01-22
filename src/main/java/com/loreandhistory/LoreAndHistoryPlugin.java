@@ -2,10 +2,9 @@ package com.loreandhistory;
 
 import com.google.inject.Provides;
 import com.loreandhistory.classes.Story;
-import com.loreandhistory.components.LoreButton;
+import com.loreandhistory.components.StoryButton;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.Player;
 import net.runelite.api.events.ClientTick;
@@ -28,6 +27,8 @@ final public class LoreAndHistoryPlugin extends Plugin
 	@Inject
 	private LoreAndHistoryConfig config;
 
+	private StoryButton storyButton;
+
 	@Override
 	protected void startUp() throws Exception
 	{
@@ -45,11 +46,12 @@ final public class LoreAndHistoryPlugin extends Plugin
 	{
 		final Player player = this.client.getLocalPlayer();
 
-		if (player != null) {
+		if (player != null && this.storyButton != null) {
 			final Story story = StoryRegistry.getStoryForZone(player.getWorldLocation());
 
 			if (story != null) {
-				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Example says " + story.getName(), null);
+				this.storyButton.setStory(story);
+				//client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Example says " + story.getName(), null);
 			}
 		}
 	}
@@ -61,7 +63,7 @@ final public class LoreAndHistoryPlugin extends Plugin
 			final Widget parent = this.client.getWidget(WidgetInfo.FIXED_VIEWPORT_MINIMAP);
 
 			if (parent != null) {
-				final LoreButton button = new LoreButton(parent);
+				this.storyButton = new StoryButton(parent);
 			}
 		}
 	}
