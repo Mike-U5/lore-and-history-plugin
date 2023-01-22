@@ -1,11 +1,13 @@
 package com.loreandhistory;
 
 import com.google.inject.Provides;
+import com.loreandhistory.classes.Story;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
-import net.runelite.api.events.PlayerChanged;
+import net.runelite.api.Player;
+import net.runelite.api.events.ClientTick;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
@@ -17,6 +19,8 @@ import net.runelite.client.plugins.PluginDescriptor;
 )
 public class LoreAndHistoryPlugin extends Plugin
 {
+	private int tickCounter = 0;
+
 	@Inject
 	private Client client;
 
@@ -36,9 +40,23 @@ public class LoreAndHistoryPlugin extends Plugin
 	}
 
 	@Subscribe
-	public void onGameStateChanged(final PlayerChanged e)
+	public void onClientTick(final ClientTick e)
 	{
-		client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Example says " + config.greeting(), null);
+		this.tickCounter++;
+
+		if (this.tickCounter % 10 == 0) {
+			final Player player = this.client.getLocalPlayer();
+
+			if (player != null) {
+				final Story story = StoryRegistry.getStoryForZone(player.getWorldLocation());
+
+				if (story != null) {
+					client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Example says " + story.getName(), null);
+				}
+			}
+
+			this.tickCounter = 0;
+		}
 	}
 
 	@Provides

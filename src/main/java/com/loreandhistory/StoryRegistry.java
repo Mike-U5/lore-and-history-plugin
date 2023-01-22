@@ -3,6 +3,8 @@ package com.loreandhistory;
 import com.loreandhistory.classes.DialogueLine;
 import com.loreandhistory.classes.Story;
 import com.loreandhistory.classes.Zone;
+import javax.annotation.Nullable;
+import net.runelite.api.coords.WorldPoint;
 
 final public class StoryRegistry {
 	private static final Story[] stories = {
@@ -15,6 +17,19 @@ final public class StoryRegistry {
 				new DialogueLine("He stroked his beard and settled back into his chair, its aged joints creaking."),
 				new DialogueLine("Let’s see now… it all started just after they lost the Accord, back in the 135th decade."),
 				new DialogueLine("The lizardmen were pummeling the border and we young recruits were sent out to face ‘em.")
-			})
+			}
+		)
 	};
+
+	@Nullable
+	public static Story getStoryForZone(final WorldPoint location)
+	{
+		for (Story story : StoryRegistry.stories) {
+			if (story.isInZone(location.getX(), location.getY())) {
+				return story;
+			}
+		}
+
+		return null;
+	}
 }
