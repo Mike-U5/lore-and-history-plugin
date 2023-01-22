@@ -10,7 +10,7 @@ final public class DialogueLine {
 	private final String text;
 	private final int durationInMs;
 
-	public DialogueLine(String text) {
+	public DialogueLine(final String text) {
 		this.text = text;
 		this.durationInMs = 1000 + (text.length() * 40);
 	}

@@ -23,36 +23,29 @@ final public class Story {
 			final DialogueLine dialogue = this.dialogueLines[this.index];
 
 			if (dialogue != null && this.tickCounter > dialogue.getDuration()) {
-				this.nextLine(client);
+				this.sayNextLine(client);
 			} else {
 				this.tickCounter += 20; // Client ticks every 20 ms
 			}
 		}
 	}
 
-	private void nextLine(final Client client) {
+	private void sayNextLine(final Client client) {
 		this.index += 1;
 		this.tickCounter = 0;
 
 		if (this.index < this.dialogueLines.length) {
-			this.playLine(client);
+			this.dialogueLines[this.index].play(client);
 		} else {
 			this.dialogueStatus = DialogueStatus.COMPLETED;
 		}
 	}
 
-	private void playLine(final Client client) {
-		if (this.dialogueStatus != DialogueStatus.PLAYING && this.index >= 0 && this.index <= this.dialogueLines.length) {
-			this.dialogueLines[this.index].play(client);
-			this.dialogueStatus = DialogueStatus.PLAYING;
-		}
-	}
-
 	public void start(final Client client) {
 		if (this.dialogueStatus == DialogueStatus.STOPPED || this.dialogueStatus == DialogueStatus.COMPLETED) {
-			this.index = 0;
 			this.dialogueStatus = DialogueStatus.PLAYING;
-			this.playLine(client);
+			this.index = -1;
+			this.sayNextLine(client);
 		}
 	}
 

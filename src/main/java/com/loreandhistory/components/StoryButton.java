@@ -55,7 +55,6 @@ final public class StoryButton {
 	private void onOptionSelected(final ScriptEvent e) {
 		if (this.activeStory != null && this.client != null) {
 			if (e.getOp() == 1) {
-				this.client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "STARTED " + e.getOp(), null);
 				this.activeStory.start(this.client);
 			} else if (e.getOp() == 2) {
 				this.activeStory.pause(this.client);
