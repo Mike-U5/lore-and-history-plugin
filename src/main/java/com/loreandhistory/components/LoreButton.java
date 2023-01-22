@@ -1,5 +1,6 @@
 package com.loreandhistory.components;
 
+import javax.inject.Inject;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.ScriptEvent;
@@ -19,13 +20,12 @@ import net.runelite.api.widgets.WidgetType;
 //4175: Book relic (4177)
 //4753: Play(ish) button
 final public class LoreButton {
+	@Inject
+	private Client client;
 	private int spriteId = 1706;
-	private final Client client;
 	private final Widget widget;
 
-	public LoreButton(final Client client, final Widget parent) {
-		this.client = client;
-
+	public LoreButton(final Widget parent) {
 		this.widget = parent.createChild(-1, WidgetType.GRAPHIC);
 		this.widget.setPos(205, 0);
 		this.widget.setSize(40, 40);
@@ -51,16 +51,16 @@ final public class LoreButton {
 
 		}
 
-		client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "CHOSE " + e.getOp(), null);
+		this.client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "CHOSE " + e.getOp(), null);
 	}
 
 	private void onMouseHover(final ScriptEvent e)
 	{
-		client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "HOVER", null);
+		this.client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "HOVER", null);
 	}
 
 	private void onMouseLeave(final ScriptEvent e)
 	{
-		client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "LEAVE", null);
+		this.client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "LEAVE", null);
 	}
 }

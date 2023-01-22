@@ -1,6 +1,11 @@
 package com.loreandhistory.classes;
 
+import javax.inject.Inject;
+import net.runelite.api.Client;
+
 final public class DialogueLine {
+	@Inject
+	private Client client;
 	private final String text;
 	private int durationInMs;
 

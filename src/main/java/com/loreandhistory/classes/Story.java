@@ -15,6 +15,17 @@ final public class Story {
 		this.dialogueLines = dialogueLines;
 	}
 
+	public boolean start() {
+		if (this.dialogueStatus == DialogueStatus.STOPPED) {
+			this.index = 0;
+			this.dialogueStatus = DialogueStatus.PLAYING;
+
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean nextLine() {
 		this.index += 1;
 		return (this.index < this.dialogueLines.length);
@@ -42,7 +53,7 @@ final public class Story {
 		return false;
 	}
 
-	public boolean stopLine() {
+	public boolean stop() {
 		if (this.dialogueStatus != DialogueStatus.STOPPED && this.index >= 0 && this.index <= this.dialogueLines.length) {
 			this.dialogueLines[this.index].stop();
 			this.dialogueStatus = DialogueStatus.STOPPED;
