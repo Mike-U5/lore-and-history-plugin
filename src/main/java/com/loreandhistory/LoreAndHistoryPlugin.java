@@ -5,6 +5,7 @@ import com.loreandhistory.classes.Story;
 import com.loreandhistory.components.StoryButton;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.Player;
 import net.runelite.api.events.ClientTick;
@@ -46,12 +47,12 @@ final public class LoreAndHistoryPlugin extends Plugin
 	{
 		final Player player = this.client.getLocalPlayer();
 
-		if (player != null && this.storyButton != null) {
+		if (player != null && this.storyButton != null && !this.storyButton.hasStory()) {
 			final Story story = StoryRegistry.getStoryForZone(player.getWorldLocation());
 
 			if (story != null) {
 				this.storyButton.setStory(story);
-				//client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Example says " + story.getName(), null);
+				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Set story to " + story.getName(), null);
 			}
 		}
 	}

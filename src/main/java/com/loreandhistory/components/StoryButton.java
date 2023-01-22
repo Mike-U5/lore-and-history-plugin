@@ -45,6 +45,11 @@ final public class StoryButton {
 		this.activeStory = story;
 	}
 
+	public boolean hasStory()
+	{
+		return this.activeStory != null;
+	}
+
 	private void onOptionSelected(final ScriptEvent e)
 	{
 		if (e.getOp() == 1 && this.activeStory != null) {
