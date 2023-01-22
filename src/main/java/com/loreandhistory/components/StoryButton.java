@@ -53,11 +53,11 @@ final public class StoryButton {
 
 	private void onOptionSelected(final ScriptEvent e) {
 		if (e.getOp() == 1 && this.activeStory != null) {
-			this.activeStory.start();
+			this.activeStory.start(this.client);
 		} else if (e.getOp() == 2) {
-			this.activeStory.pause();
+			this.activeStory.pause(this.client);
 		} else if (e.getOp() == 3) {
-			this.activeStory.stop();
+			this.activeStory.stop(this.client);
 		}
 	}
 
