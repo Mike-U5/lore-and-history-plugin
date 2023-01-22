@@ -8,7 +8,7 @@ final public class DialogueLine {
 	@Inject
 	private Client client;
 	private final String text;
-	private int durationInMs;
+	private final int durationInMs;
 
 	public DialogueLine(String text) {
 		this.text = text;

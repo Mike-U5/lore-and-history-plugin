@@ -29,30 +29,33 @@ final public class Story {
 		}
 	}
 
-	public void start() {
-		if (this.dialogueStatus == DialogueStatus.STOPPED || this.dialogueStatus == DialogueStatus.COMPLETED) {
-			this.index = 0;
-			this.dialogueStatus = DialogueStatus.PLAYING;
-		}
-	}
-
-	public void nextLine() {
+	private void nextLine() {
 		this.index += 1;
 		this.tickCounter = 0;
 
-		if (this.index >= this.dialogueLines.length) {
+		if (this.index < this.dialogueLines.length) {
+			this.playLine();
+		} else {
 			this.dialogueStatus = DialogueStatus.COMPLETED;
 		}
 	}
 
-	public void playLine() {
+	private void playLine() {
 		if (this.dialogueStatus != DialogueStatus.PLAYING && this.index >= 0 && this.index <= this.dialogueLines.length) {
 			this.dialogueLines[this.index].play();
 			this.dialogueStatus = DialogueStatus.PLAYING;
 		}
 	}
 
-	public void pauseLine() {
+	public void start() {
+		if (this.dialogueStatus == DialogueStatus.STOPPED || this.dialogueStatus == DialogueStatus.COMPLETED) {
+			this.index = 0;
+			this.dialogueStatus = DialogueStatus.PLAYING;
+			this.playLine();
+		}
+	}
+
+	public void pause() {
 		if (this.dialogueStatus != DialogueStatus.PAUSED && this.index >= 0 && this.index <= this.dialogueLines.length) {
 			this.dialogueLines[this.index].pause();
 			this.dialogueStatus = DialogueStatus.PAUSED;

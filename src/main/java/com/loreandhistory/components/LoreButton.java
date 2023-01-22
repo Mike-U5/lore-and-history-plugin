@@ -1,5 +1,6 @@
 package com.loreandhistory.components;
 
+import com.loreandhistory.classes.Story;
 import javax.inject.Inject;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
@@ -22,8 +23,11 @@ import net.runelite.api.widgets.WidgetType;
 final public class LoreButton {
 	@Inject
 	private Client client;
-	private int spriteId = 1706;
+
 	private final Widget widget;
+
+	private int spriteId = 1706;
+	private Story activeStory = null;
 
 	public LoreButton(final Widget parent) {
 		this.widget = parent.createChild(-1, WidgetType.GRAPHIC);
@@ -41,14 +45,18 @@ final public class LoreButton {
 		this.widget.setHasListener(true);
 	}
 
+	public void setActiveDialogue(final Story story) {
+		this.activeStory = story;
+	}
+
 	private void onOptionSelected(final ScriptEvent e)
 	{
-		if (e.getOp() == 1) {
-
+		if (e.getOp() == 1 && this.activeStory != null) {
+			this.activeStory.start();
 		} else if (e.getOp() == 2) {
-
+			this.activeStory.pause();
 		} else if (e.getOp() == 3) {
-
+			this.activeStory.stop();
 		}
 
 		this.client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "CHOSE " + e.getOp(), null);
