@@ -31,20 +31,17 @@ final public class LoreAndHistoryPlugin extends Plugin
 	private StoryButton storyButton;
 
 	@Override
-	protected void startUp() throws Exception
-	{
+	protected void startUp() throws Exception {
 		log.info("Example started!");
 	}
 
 	@Override
-	protected void shutDown() throws Exception
-	{
+	protected void shutDown() throws Exception {
 		log.info("Example stopped!");
 	}
 
 	@Subscribe
-	public void onClientTick(final ClientTick e)
-	{
+	public void onClientTick(final ClientTick e) {
 		final Player player = this.client.getLocalPlayer();
 
 		if (player != null && this.storyButton != null && !this.storyButton.hasStory()) {
@@ -58,8 +55,7 @@ final public class LoreAndHistoryPlugin extends Plugin
 	}
 
 	@Subscribe
-	public void onWidgetLoaded(final WidgetLoaded e)
-	{
+	public void onWidgetLoaded(final WidgetLoaded e) {
 		if (e.getGroupId() == WidgetInfo.FIXED_VIEWPORT_MINIMAP.getGroupId()) {
 			final Widget parent = this.client.getWidget(WidgetInfo.FIXED_VIEWPORT_MINIMAP);
 
@@ -70,8 +66,7 @@ final public class LoreAndHistoryPlugin extends Plugin
 	}
 
 	@Provides
-	LoreAndHistoryConfig provideConfig(ConfigManager configManager)
-	{
+	LoreAndHistoryConfig provideConfig(ConfigManager configManager) {
 		return configManager.getConfig(LoreAndHistoryConfig.class);
 	}
 }

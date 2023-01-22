@@ -30,6 +30,7 @@ final public class StoryButton {
 		this.widget.setPos(205, 0);
 		this.widget.setSize(40, 40);
 		this.widget.setSpriteId(2149);
+		this.widget.setHidden(true);
 
 		this.widget.setAction(0, "Play");
 		this.widget.setAction(1, "Pause");
@@ -43,16 +44,14 @@ final public class StoryButton {
 
 	public void setStory(final Story story) {
 		this.activeStory = story;
-		this.widget.setOpacity(this.hasStory() ? 51 : 255);
+		this.widget.setHidden(!this.hasStory());
 	}
 
-	public boolean hasStory()
-	{
+	public boolean hasStory() {
 		return this.activeStory != null;
 	}
 
-	private void onOptionSelected(final ScriptEvent e)
-	{
+	private void onOptionSelected(final ScriptEvent e) {
 		if (e.getOp() == 1 && this.activeStory != null) {
 			this.activeStory.start();
 		} else if (e.getOp() == 2) {
@@ -62,13 +61,11 @@ final public class StoryButton {
 		}
 	}
 
-	private void onMouseHover(final ScriptEvent e)
-	{
+	private void onMouseHover(final ScriptEvent e) {
 		//LoreAndHistoryPlugin.clientSingleton.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "HOVER", null);
 	}
 
-	private void onMouseLeave(final ScriptEvent e)
-	{
+	private void onMouseLeave(final ScriptEvent e) {
 		//LoreAndHistoryPlugin.clientSingleton.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "LEAVE", null);
 	}
 }

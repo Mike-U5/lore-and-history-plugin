@@ -15,23 +15,19 @@ final public class DialogueLine {
 		this.durationInMs = 1000 + (text.length() * 40);
 	}
 
-	public void play()
-	{
+	public void play() {
 		this.client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", this.text, null);
 	}
 
-	public void pause()
-	{
+	public void pause() {
 
 	}
 
-	public void stop()
-	{
+	public void stop() {
 
 	}
 
-	public int getDuration()
-	{
+	public int getDuration() {
 		return this.durationInMs;
 	}
 }
