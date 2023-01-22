@@ -15,15 +15,15 @@ final public class DialogueLine {
 		this.durationInMs = 1000 + (text.length() * 40);
 	}
 
-	public void play(final Client client) {
+	public void playDialogue(final Client client) {
 		this.client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", this.text, null);
 	}
 
-	public void pause(final Client client) {
+	public void pauseDialogue(final Client client) {
 
 	}
 
-	public void stop(final Client client) {
+	public void stopDialogue(final Client client) {
 
 	}
 

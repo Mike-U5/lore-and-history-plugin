@@ -35,13 +35,13 @@ final public class Story {
 		this.tickCounter = 0;
 
 		if (this.index < this.dialogueLines.length) {
-			this.dialogueLines[this.index].play(client);
+			this.dialogueLines[this.index].playDialogue(client);
 		} else {
 			this.dialogueStatus = DialogueStatus.COMPLETED;
 		}
 	}
 
-	public void start(final Client client) {
+	public void startStory(final Client client) {
 		if (this.dialogueStatus == DialogueStatus.STOPPED || this.dialogueStatus == DialogueStatus.COMPLETED) {
 			this.dialogueStatus = DialogueStatus.PLAYING;
 			this.index = -1;
@@ -49,16 +49,16 @@ final public class Story {
 		}
 	}
 
-	public void pause(final Client client) {
+	public void pauseStory(final Client client) {
 		if (this.dialogueStatus != DialogueStatus.PAUSED && this.index >= 0 && this.index <= this.dialogueLines.length) {
-			this.dialogueLines[this.index].pause(client);
+			this.dialogueLines[this.index].pauseDialogue(client);
 			this.dialogueStatus = DialogueStatus.PAUSED;
 		}
 	}
 
-	public void stop(final Client client) {
+	public void stopStory(final Client client) {
 		if (this.dialogueStatus != DialogueStatus.STOPPED && this.index >= 0 && this.index <= this.dialogueLines.length) {
-			this.dialogueLines[this.index].stop(client);
+			this.dialogueLines[this.index].stopDialogue(client);
 			this.dialogueStatus = DialogueStatus.STOPPED;
 		}
 	}

@@ -1,7 +1,6 @@
 package com.loreandhistory.components;
 
 import com.loreandhistory.classes.Story;
-import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.ScriptEvent;
 import net.runelite.api.widgets.JavaScriptCallback;
@@ -55,11 +54,11 @@ final public class StoryButton {
 	private void onOptionSelected(final ScriptEvent e) {
 		if (this.activeStory != null && this.client != null) {
 			if (e.getOp() == 1) {
-				this.activeStory.start(this.client);
+				this.activeStory.startStory(this.client);
 			} else if (e.getOp() == 2) {
-				this.activeStory.pause(this.client);
+				this.activeStory.pauseStory(this.client);
 			} else if (e.getOp() == 3) {
-				this.activeStory.stop(this.client);
+				this.activeStory.stopStory(this.client);
 			}
 		}
 	}
