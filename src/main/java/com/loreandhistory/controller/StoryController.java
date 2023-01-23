@@ -32,8 +32,12 @@ final public class StoryController {
 
 	public void tick() {
 		if (this.story == null || !this.story.isInProgress()) {
+			// Set new active story
 			this.story = StoryRegistry.getStoryForZone(this.client.getLocalPlayer().getWorldLocation());
 			this.storyButton.setStory(this.story);
+		} else {
+			// Progress active story
+			this.story.tick(this.client);
 		}
 	}
 }

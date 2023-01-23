@@ -1,6 +1,7 @@
 package com.loreandhistory.classes;
 
 import com.loreandhistory.enums.DialogueStatus;
+import net.runelite.api.Client;
 
 final public class Story {
 	final private String name;
@@ -17,7 +18,7 @@ final public class Story {
 		this.dialogueLines = dialogueLines;
 	}
 
-	public void tick() {
+	public void tick(final Client client) {
 		if (this.dialogueStatus == DialogueStatus.PLAYING) {
 			final DialogueLine dialogue = this.dialogueLines[this.index];
 
