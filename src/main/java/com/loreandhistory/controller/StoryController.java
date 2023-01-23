@@ -31,10 +31,8 @@ final public class StoryController {
 	}
 
 	public void tick() {
-		final Story story = StoryRegistry.getStoryForZone(this.client.getLocalPlayer().getWorldLocation());
-
-		if (story != null) {
-			this.story = story;
+		if (this.story == null || !this.story.isInProgress()) {
+			this.story = StoryRegistry.getStoryForZone(this.client.getLocalPlayer().getWorldLocation());
 			this.storyButton.setStory(this.story);
 		}
 	}

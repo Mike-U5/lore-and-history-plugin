@@ -72,6 +72,11 @@ final public class Story {
 		return false;
 	}
 
+	public boolean isInProgress()
+	{
+		return this.dialogueStatus == DialogueStatus.PAUSED || this.dialogueStatus == DialogueStatus.PLAYING;
+	}
+
 	public String getName() {
 		return this.name;
 	}
