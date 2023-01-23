@@ -1,13 +1,11 @@
 package com.loreandhistory;
 
 import com.google.inject.Provides;
-import com.loreandhistory.classes.Story;
 import com.loreandhistory.components.StoryButton;
+import com.loreandhistory.controller.StoryController;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
-import net.runelite.api.Player;
 import net.runelite.api.events.ClientTick;
 import net.runelite.api.events.WidgetLoaded;
 import net.runelite.api.widgets.Widget;
@@ -30,8 +28,6 @@ final public class LoreAndHistoryPlugin extends Plugin
 	@Inject
 	private LoreAndHistoryConfig config;
 
-	private StoryButton storyButton;
-
 	@Override
 	protected void startUp() throws Exception {
 		LoreAndHistoryPlugin.CLIENT = this.client;
@@ -45,25 +41,18 @@ final public class LoreAndHistoryPlugin extends Plugin
 
 	@Subscribe
 	public void onClientTick(final ClientTick e) {
-		final Player player = this.client.getLocalPlayer();
-
-		if (player != null && this.storyButton != null && !this.storyButton.hasStory()) {
-			final Story story = StoryRegistry.getStoryForZone(player.getWorldLocation());
-
-			if (story != null) {
-				this.storyButton.setStory(story);
-				client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Set story to " + story.getName(), null);
-			}
+		if (StoryController.isInitialised()) {
+			StoryController.get().tick();
 		}
 	}
 
 	@Subscribe
 	public void onWidgetLoaded(final WidgetLoaded e) {
-		if (e.getGroupId() == WidgetInfo.FIXED_VIEWPORT_MINIMAP.getGroupId()) {
+		if (e.getGroupId() == WidgetInfo.FIXED_VIEWPORT_MINIMAP.getGroupId() && !StoryController.isInitialised()) {
 			final Widget parent = this.client.getWidget(WidgetInfo.FIXED_VIEWPORT_MINIMAP);
 
 			if (parent != null) {
-				this.storyButton = new StoryButton(parent);
+				StoryController.initialise(this.client, new StoryButton(parent));
 			}
 		}
 	}
